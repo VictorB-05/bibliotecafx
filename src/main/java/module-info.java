@@ -10,4 +10,8 @@ module org.example.bibliotecafx {
 
     opens org.example.bibliotecafx.interfaz to javafx.fxml;
     exports org.example.bibliotecafx.interfaz;
+
+    //Abre los modulos de hibbernate
+
+    opens org.example.bibliotecafx.entidades to org.hibernate.orm.core;
 }

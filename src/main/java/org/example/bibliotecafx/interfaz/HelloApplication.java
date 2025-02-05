@@ -12,6 +12,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/interfaz/hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 700);
+        scene.getStylesheets().add(getClass().getResource("/org/example/bibliotecafx/interfaz/styles.css").toExternalForm());
         stage.setTitle("Biblioteca!");
         stage.setScene(scene);
         stage.show();
