@@ -4,13 +4,43 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="scene2" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
+<AnchorPane fx:id="scene2" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
     <children>
-        <Label text="Libros" layoutX="20.0" layoutY="20.0">
+        <Label layoutX="492.0" layoutY="7.0" text="Libros">
             <font>
-                <Font size="25.0" />
+                <Font size="81.0" />
             </font>
         </Label>
-        <Button onAction="#switchBotton" mnemonicParsing="false" text="Button" layoutX="20.0" layoutY="100.0" styleClass="menu-button"/>
+        <Button layoutX="92.0" layoutY="49.0" mnemonicParsing="false" onAction="#switchBotton" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="MENU PRINCIPAL">
+         <font>
+            <Font size="24.0" />
+         </font>
+        </Button>
+        <Button layoutX="92.0" layoutY="183.0" mnemonicParsing="false" onAction="#addLibros" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Añadir libros">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+        <Button layoutX="92.0" layoutY="283.0" mnemonicParsing="false" onAction="#switchBotton" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Modificar libros">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+        <Button layoutX="92.0" layoutY="383.0" mnemonicParsing="false" onAction="#deleteLibros" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Eliminar libros">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+        <Button layoutX="92.0" layoutY="483.0" mnemonicParsing="false" onAction="#switchBotton" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Buscar libros">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+        <Button layoutX="92.0" layoutY="583.0" mnemonicParsing="false" onAction="#switchBotton" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Listar libros">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+      <AnchorPane fx:id="ventana" layoutX="454.0" layoutY="158.0" prefHeight="450.0" prefWidth="600.0" />
     </children>
 </AnchorPane>

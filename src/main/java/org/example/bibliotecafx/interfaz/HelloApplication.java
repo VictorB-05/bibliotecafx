@@ -3,6 +3,7 @@ package org.example.bibliotecafx.interfaz;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,8 +15,9 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1200, 700);
         scene.getStylesheets().add(getClass().getResource("/org/example/bibliotecafx/interfaz/styles.css").toExternalForm());
         stage.setTitle("Biblioteca!");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("/imagenes/icono.png"));
         stage.setScene(scene);
         stage.show();
     }
-
 }
