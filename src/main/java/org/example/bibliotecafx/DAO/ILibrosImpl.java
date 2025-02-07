@@ -28,7 +28,24 @@ public class ILibrosImpl implements ILibros {
 
     @Override
     public boolean deleteLibros(int id) {
-        return false;
+        boolean res = true;
+        try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession()) {
+            //transaccion
+            session.beginTransaction();
+
+            Libros libro = session.get(Libros.class,id);
+
+            if(libro!= null){
+                session.delete(libro);
+            }else{
+                res = false;
+            }
+
+            // guardar en mi bbdd
+            session.getTransaction();
+        }
+        return res;
     }
 
     @Override

@@ -25,6 +25,8 @@ public class GestionLibros {
     private TextField editorial;
     @FXML
     private TextField anyo;
+    @FXML
+    private TextField id;
 
     @FXML
     protected void switchBotton() throws IOException {
@@ -51,8 +53,9 @@ public class GestionLibros {
 
     @FXML
     protected void deleteLibrosBBDD(ActionEvent actionEvent) {
-        //Hibernate
-        System.out.println("paco");
+        ILibros iLibros = new ILibrosImpl();
+        int idInt = Integer.parseInt(id.getText().trim());
+        iLibros.deleteLibros(idInt);
     }
 
 
