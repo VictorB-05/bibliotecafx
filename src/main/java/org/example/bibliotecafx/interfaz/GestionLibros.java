@@ -2,13 +2,15 @@ package org.example.bibliotecafx.interfaz;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.example.bibliotecafx.DAO.ILibros;
 import org.example.bibliotecafx.DAO.ILibrosImpl;
 import org.example.bibliotecafx.entidades.Libros;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestionLibros {
     @FXML
@@ -27,6 +29,24 @@ public class GestionLibros {
     private TextField anyo;
     @FXML
     private TextField id;
+    @FXML
+    private RadioButton tituloR;
+    @FXML
+    private RadioButton autorR;
+    @FXML
+    private RadioButton isbnR;
+    @FXML
+    private TableView<Libros> tabla;
+    @FXML
+    private TableColumn<Libros,Integer> idTable;
+    @FXML
+    private TableColumn<Libros,String> tituloTable;
+    @FXML
+    private TableColumn<Libros,Integer> isbnTable;
+    @FXML
+    private TableColumn<Libros,String> editorialTable;
+    @FXML
+    private TableColumn<Libros,Integer> anyoTable;
 
     @FXML
     protected void switchBotton() throws IOException {
@@ -59,4 +79,27 @@ public class GestionLibros {
     }
 
 
+    @FXML
+    public void buscarLibros(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/libros/LibrosBuscar.fxml");
+    }
+
+    @FXML
+    public void buscarLibrosBBDD(ActionEvent actionEvent) {
+        ILibros iLibros = new ILibrosImpl();
+        List<Libros> libros = new ArrayList<Libros>();
+        if(tituloR.isFocused()) {
+            libros = iLibros.buscarLibrosTitulo(id.getText());
+        }else if(isbnR.isFocused()){
+            int ISBN = Integer.parseInt( id.getText());
+            libros = iLibros.buscarLibrosISBN(ISBN);
+        }else if(autorR.isFocused()){
+            libros = iLibros.buscarLibrosAutor(id.getText());
+        }else{
+            return;
+        }
+        for(Libros libro : libros){
+
+        }
+    }
 }

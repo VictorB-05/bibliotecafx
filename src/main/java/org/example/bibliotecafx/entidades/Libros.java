@@ -11,7 +11,7 @@ public class Libros implements Serializable {
     private Integer id;
 
     @Column(nullable = false)
-    private String nombre;
+    private String titulo;
 
     @Column(nullable = false)
     private String isbn;
@@ -24,15 +24,15 @@ public class Libros implements Serializable {
     @JoinColumn(name = "idAutor", nullable = true) // Foreign key
     private Autores autores;
 
-    public Libros(String nombre, String isbn, String editorial, int anyo) {
-        this.nombre = nombre;
+    public Libros(String titulo, String isbn, String editorial, int anyo) {
+        this.titulo = titulo;
         this.isbn = isbn;
         this.editorial = editorial;
         this.anyo = anyo;
     }
 
-    public Libros(String nombre, String isbn, String editorial, int anyo, Autores autores) {
-        this.nombre = nombre;
+    public Libros(String titulo, String isbn, String editorial, int anyo, Autores autores) {
+        this.titulo = titulo;
         this.isbn = isbn;
         this.editorial = editorial;
         this.anyo = anyo;
@@ -50,12 +50,12 @@ public class Libros implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String gettitulo() {
+        return titulo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void settitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getIsbn() {

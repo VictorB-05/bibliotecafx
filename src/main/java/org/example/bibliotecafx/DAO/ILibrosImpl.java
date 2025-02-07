@@ -50,7 +50,15 @@ public class ILibrosImpl implements ILibros {
 
     @Override
     public List<Libros> buscarLibrosTitulo(String titulo) {
-        return null;
+        List<Libros> libro;
+        // usamos try with para usar el auto-close de session
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            //HQL (SQL de hibernate) es caseSensitive (la mayusculas si cuentan)
+            libro = session.createQuery("from Libros where titulo = :titulo", Libros.class)
+                    .setParameter("titulo", titulo)
+                    .list();
+        }
+        return libro;
     }
 
     @Override

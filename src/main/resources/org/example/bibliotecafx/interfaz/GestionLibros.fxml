@@ -31,7 +31,7 @@
                 <Font size="24.0" />
             </font>
         </Button>
-        <Button layoutX="92.0" layoutY="483.0" mnemonicParsing="false" onAction="#switchBotton" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Buscar libros">
+        <Button layoutX="92.0" layoutY="483.0" mnemonicParsing="false" onAction="#buscarLibros" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Buscar libros">
             <font>
                 <Font size="24.0" />
             </font>
