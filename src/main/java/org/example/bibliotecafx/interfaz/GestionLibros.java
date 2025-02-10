@@ -135,5 +135,8 @@ public class GestionLibros {
         }
         tableView.getItems().addAll(libros);
     }
-
+    @FXML
+    public void modificarLibros(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/libros/LibrosModiifcar.fxml");
+    }
 }
