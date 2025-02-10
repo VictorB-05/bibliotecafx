@@ -4,12 +4,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
-    <TextField fx:id="id" layoutX="212.5" layoutY="105.0" prefWidth="175.0" />
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="262.5" layoutY="75.0" prefHeight="20.0" prefWidth="75.0" text="ID">
-        <font>
-            <Font size="20.0" />
-        </font>
-    </Label>
-    <Button layoutX="225.0" layoutY="175.0" mnemonicParsing="false" onAction="#deleteLibrosBBDD" prefHeight="20.0" prefWidth="150.0" text="Añadir libros" />
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
+    <TextField fx:id="id" layoutX="143.0" layoutY="37.0" prefWidth="175.0" />
+    <Button layoutX="358.0" layoutY="37.0" mnemonicParsing="false" onAction="#buscarLibrosBBDD" prefHeight="20.0" prefWidth="150.0" text="Buscar libros" />
+    <VBox layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="75.0">
+        <children>
+            <fx:define>
+                <ToggleGroup fx:id="group" />
+            </fx:define>
+            <RadioButton fx:id="tituloR" mnemonicParsing="false" text="Título" toggleGroup="$group" />
+            <RadioButton fx:id="autorR" mnemonicParsing="false" text="Autor " toggleGroup="$group" />
+            <RadioButton fx:id="isbnR" mnemonicParsing="false" text="ISBN" toggleGroup="$group" />
+        </children></VBox>
+    <TableView fx:id="tableView" layoutX="100.0" layoutY="100.0" prefHeight="350.0" prefWidth="640.0" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="idTable" prefWidth="41.0" text="id" />
+            <TableColumn fx:id="tituloTable" prefWidth="155.0" text="titulo" />
+            <TableColumn fx:id="isbnTable" prefWidth="148.0" text="isbn" />
+            <TableColumn fx:id="editorialTable" prefWidth="97.0" text="editorial" />
+            <TableColumn fx:id="anyoTable" minWidth="1.0" prefWidth="52.0" text="año" />
+            <TableColumn fx:id="autorTable" minWidth="1.0" prefWidth="147.0" text="autor" />
+        </columns>
+    </TableView>
 </AnchorPane>
