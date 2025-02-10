@@ -2,15 +2,21 @@ package org.example.bibliotecafx.interfaz;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import org.example.bibliotecafx.DAO.ILibros;
 import org.example.bibliotecafx.DAO.ILibrosImpl;
+import org.example.bibliotecafx.entidades.Autores;
 import org.example.bibliotecafx.entidades.Libros;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class GestionLibros {
     @FXML
@@ -36,7 +42,7 @@ public class GestionLibros {
     @FXML
     private RadioButton isbnR;
     @FXML
-    private TableView<Libros> tabla;
+    private TableView<Libros> tableView;
     @FXML
     private TableColumn<Libros,Integer> idTable;
     @FXML
@@ -47,6 +53,8 @@ public class GestionLibros {
     private TableColumn<Libros,String> editorialTable;
     @FXML
     private TableColumn<Libros,Integer> anyoTable;
+    @FXML
+    private TableColumn<Libros, Autores> autorTable;
 
     @FXML
     protected void switchBotton() throws IOException {
@@ -55,7 +63,23 @@ public class GestionLibros {
 
     @FXML
     protected void addLibros(ActionEvent actionEvent) throws IOException {
+
+
         new SeceneSwitch(ventana,"/org/example/bibliotecafx/libros/LibrosAdd.fxml");
+
+//        ILibrosImpl librosDao = new ILibrosImpl();
+//        List<Libros> librosAnaya = Arrays.asList(
+//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
+//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
+//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
+//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
+//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
+//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022)
+//        );
+//
+//        for (Libros libro : librosAnaya) {
+//            librosDao.addLibro(libro);
+//        }
     }
 
     @FXML
@@ -86,20 +110,30 @@ public class GestionLibros {
 
     @FXML
     public void buscarLibrosBBDD(ActionEvent actionEvent) {
+        if(idTable.getCellValueFactory() == null){
+            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+            tituloTable.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+            isbnTable.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+            editorialTable.setCellValueFactory(new PropertyValueFactory<>("editorial"));
+            anyoTable.setCellValueFactory(new PropertyValueFactory<>("anyo"));
+            autorTable.setCellValueFactory(new PropertyValueFactory<>("autores"));
+        }else{
+            tableView.getItems().clear();
+        }
+
         ILibros iLibros = new ILibrosImpl();
         List<Libros> libros = new ArrayList<Libros>();
-        if(tituloR.isFocused()) {
+        if(tituloR.isSelected()) {
+            System.out.println(id.getText());
             libros = iLibros.buscarLibrosTitulo(id.getText());
-        }else if(isbnR.isFocused()){
-            int ISBN = Integer.parseInt( id.getText());
-            libros = iLibros.buscarLibrosISBN(ISBN);
-        }else if(autorR.isFocused()){
+        }else if(isbnR.isSelected()){
+            libros = iLibros.buscarLibrosISBN(id.getText().trim());
+        }else if(autorR.isSelected()){
             libros = iLibros.buscarLibrosAutor(id.getText());
         }else{
             return;
         }
-        for(Libros libro : libros){
-
-        }
+        tableView.getItems().addAll(libros);
     }
+
 }

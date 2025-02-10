@@ -17,12 +17,12 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17.0.2</version>
+      <version>17.0.12</version>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>17.0.2</version>
+      <version>17.0.12</version>
     </dependency>
 <dependency>
       <groupId>org.controlsfx</groupId>
@@ -106,7 +106,12 @@
             <!-- Usage: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>org.example.bibliotecafx.interfaz.HelloApplication</mainClass>
+                <mainClass>org.example.bibliotecafx.interfaz.HelloApplication</mainClass>
+                <modules>
+                    <module>javafx.controls</module>
+                    <module>javafx.fxml</module>
+                </modules>
+                    <version>17.0.12</version>
             </configuration>
           </execution>
         </executions>

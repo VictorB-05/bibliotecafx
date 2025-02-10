@@ -4,12 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
-    <TextField fx:id="id" layoutX="212.5" layoutY="105.0" prefWidth="175.0" />
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="262.5" layoutY="75.0" prefHeight="20.0" prefWidth="75.0" text="ID">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
+    <TextField fx:id="id" layoutX="288.0" layoutY="116.0" prefWidth="175.0" />
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="86.0" prefHeight="20.0" prefWidth="75.0" text="ID">
         <font>
             <Font size="20.0" />
         </font>
     </Label>
-    <Button layoutX="225.0" layoutY="175.0" mnemonicParsing="false" onAction="#deleteLibrosBBDD" prefHeight="20.0" prefWidth="150.0" text="Añadir libros" />
+    <Button layoutX="300.0" layoutY="186.0" mnemonicParsing="false" onAction="#deleteLibrosBBDD" prefHeight="20.0" prefWidth="150.0" text="Añadir libros" />
 </AnchorPane>

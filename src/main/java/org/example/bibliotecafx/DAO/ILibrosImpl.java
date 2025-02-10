@@ -1,10 +1,12 @@
 package org.example.bibliotecafx.DAO;
 
+import org.example.bibliotecafx.entidades.Autores;
 import org.example.bibliotecafx.entidades.Libros;
 import org.example.bibliotecafx.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ILibrosImpl implements ILibros {
@@ -50,14 +52,14 @@ public class ILibrosImpl implements ILibros {
 
     @Override
     public List<Libros> buscarLibrosTitulo(String titulo) {
-        List<Libros> libro;
+        List<Libros> libro = new ArrayList<>();;
         // usamos try with para usar el auto-close de session
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            //HQL (SQL de hibernate) es caseSensitive (la mayusculas si cuentan)
             libro = session.createQuery("from Libros where titulo = :titulo", Libros.class)
                     .setParameter("titulo", titulo)
                     .list();
         }
+        autoresAninimos(libro);
         return libro;
     }
 
@@ -67,12 +69,30 @@ public class ILibrosImpl implements ILibros {
     }
 
     @Override
-    public List<Libros> buscarLibrosISBN(int isbn) {
-        return null;
+    public List<Libros> buscarLibrosISBN(String isbn) {
+        List<Libros> libro = new ArrayList<>();;
+        // usamos try with para usar el auto-close de session
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            libro = session.createQuery("from Libros where isbn = :ISBN", Libros.class)
+                    .setParameter("ISBN", isbn)
+                    .list();
+        }
+        autoresAninimos(libro);
+        return libro;
     }
 
     @Override
     public List<Libros> buscarLibrosDisponibles() {
         return null;
+    }
+
+    public void autoresAninimos(List<Libros> libros){
+        for(Libros libro : libros){
+            if (libro.getAutores()==null){
+                Autores anonimo = new Autores();
+                anonimo.setNombre("Anonimo");
+                libro.setAutores(anonimo);
+            }
+        }
     }
 }

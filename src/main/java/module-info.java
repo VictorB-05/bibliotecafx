@@ -18,5 +18,5 @@ module org.example.bibliotecafx {
     opens imagenes;
 
     //Abre los modulos de hibbernate
-    opens org.example.bibliotecafx.entidades to org.hibernate.orm.core;
+    opens org.example.bibliotecafx.entidades to org.hibernate.orm.core, javafx.fxml, javafx.base;
 }

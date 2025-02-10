@@ -4,35 +4,35 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionLibros">
    <children>
-      <TextField fx:id="titulo" layoutX="70.0" layoutY="105.0" prefWidth="175.0" />
-      <TextField fx:id="isbn" layoutX="360.0" layoutY="105.0" prefWidth="175.0" />
-      <TextField fx:id="autor" layoutX="70.0" layoutY="210.0" prefWidth="175.0" />
-      <TextField fx:id="editorial" layoutX="360.0" layoutY="210.0" prefWidth="175.0" />
-      <TextField fx:id="anyo" layoutX="70.0" layoutY="315.0" prefWidth="175.0" />
-      <Button layoutX="360.0" layoutY="315.0" mnemonicParsing="false" prefWidth="175.0" text="AÑADIR LIBRO" onAction="#addLibrosBBDD" />
-      <Label layoutX="70.0" layoutY="75.0" prefHeight="17.0" prefWidth="74.0" text="TITULO">
+      <TextField fx:id="titulo" layoutX="143.0" layoutY="101.0" prefWidth="175.0" />
+      <TextField fx:id="isbn" layoutX="433.0" layoutY="101.0" prefWidth="175.0" />
+      <TextField fx:id="autor" layoutX="143.0" layoutY="206.0" prefWidth="175.0" />
+      <TextField fx:id="editorial" layoutX="433.0" layoutY="206.0" prefWidth="175.0" />
+      <TextField fx:id="anyo" layoutX="143.0" layoutY="311.0" prefWidth="175.0" />
+      <Button layoutX="433.0" layoutY="311.0" mnemonicParsing="false" onAction="#addLibrosBBDD" prefWidth="175.0" text="AÑADIR LIBRO" />
+      <Label layoutX="143.0" layoutY="71.0" prefHeight="17.0" prefWidth="74.0" text="TITULO">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="360.0" layoutY="75.0" text="ISBN">
+      <Label layoutX="433.0" layoutY="71.0" text="ISBN">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="70.0" layoutY="180.0" text="AUTOR ID">
+      <Label layoutX="143.0" layoutY="176.0" text="AUTOR ID">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="360.0" layoutY="180.0" text="EDITORIAL">
+      <Label layoutX="433.0" layoutY="176.0" text="EDITORIAL">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="70.0" layoutY="285.0" text="AÑO PUBLICACIÓN">
+      <Label layoutX="143.0" layoutY="281.0" text="AÑO PUBLICACIÓN">
          <font>
             <Font size="20.0" />
          </font>

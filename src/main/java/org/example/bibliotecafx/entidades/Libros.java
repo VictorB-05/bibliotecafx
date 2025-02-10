@@ -29,6 +29,8 @@ public class Libros implements Serializable {
         this.isbn = isbn;
         this.editorial = editorial;
         this.anyo = anyo;
+        autores = new Autores();
+        autores.setNombre("anonimo");
     }
 
     public Libros(String titulo, String isbn, String editorial, int anyo, Autores autores) {
@@ -50,11 +52,11 @@ public class Libros implements Serializable {
         this.id = id;
     }
 
-    public String gettitulo() {
+    public String getTitulo() {
         return titulo;
     }
 
-    public void settitulo(String titulo) {
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
@@ -80,5 +82,13 @@ public class Libros implements Serializable {
 
     public void setAnyo(int anyo) {
         this.anyo = anyo;
+    }
+
+    public Autores getAutores() {
+        return autores;
+    }
+
+    public void setAutores(Autores autores) {
+        this.autores = autores;
     }
 }

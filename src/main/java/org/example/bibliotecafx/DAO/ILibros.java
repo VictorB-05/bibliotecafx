@@ -10,7 +10,7 @@ public interface ILibros {
     boolean deleteLibros(int id);
     List<Libros> buscarLibrosTitulo(String titulo);
     List<Libros> buscarLibrosAutor(String Autor);
-    List<Libros> buscarLibrosISBN(int isbn);
+    List<Libros> buscarLibrosISBN(String isbn);
     List<Libros> buscarLibrosDisponibles();
 
 }
