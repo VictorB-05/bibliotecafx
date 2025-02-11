@@ -139,4 +139,20 @@ public class GestionLibros {
     public void modificarLibros(ActionEvent actionEvent) throws IOException {
         new SeceneSwitch(ventana,"/org/example/bibliotecafx/libros/LibrosModiifcar.fxml");
     }
+
+    @FXML
+    public void modificarLibrosBBDD(ActionEvent actionEvent) {
+        Libros libro;
+        int anyo = Integer.parseInt(this.anyo.getText());
+        int id = Integer.parseInt(this.id.getText());
+        if(autor.getText().trim()==""){
+            libro  = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyo);
+
+        }else{
+            libro  = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyo);
+        }
+        ILibros librosDDBB = new ILibrosImpl();
+        librosDDBB.modificarLibros(libro);
+        libro.setId(id);
+    }
 }

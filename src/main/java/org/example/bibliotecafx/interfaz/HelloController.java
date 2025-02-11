@@ -17,7 +17,8 @@ public class HelloController {
     }
 
     @FXML
-    public void onGestionAutoresClick(ActionEvent actionEvent) {
+    public void onGestionAutoresClick(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(scene1,"/org/example/bibliotecafx/interfaz/GestionAutores.fxml");
     }
 
     @FXML

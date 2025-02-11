@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionAutores">
+   <children>
+      <TextField fx:id="nombre" layoutX="143.0" layoutY="184.0" prefWidth="175.0" />
+      <TextField fx:id="pais" layoutX="433.0" layoutY="184.0" prefWidth="175.0" />
+      <Button layoutX="288.0" layoutY="321.0" mnemonicParsing="false" onAction="#addAutorBBDD" prefWidth="175.0" text="AÑADIR AUTOR" />
+      <Label layoutX="143.0" layoutY="154.0" prefHeight="17.0" prefWidth="74.0" text="Nombre">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="433.0" layoutY="154.0" text="Pais">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

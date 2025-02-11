@@ -9,45 +9,45 @@ import org.hibernate.SessionFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ILibrosImpl implements ILibros {
+public class IAutoresImpl implements IAutores {
     @Override
-    public void addLibro(Libros libros) {
+    public void addAutores(Autores autor) {
         try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.openSession()) {
             //transaccion
             session.beginTransaction();
 
-            session.persist(libros);
+            session.persist(autor);
 
             session.getTransaction();
         }
     }
 
     @Override
-    public void modificarLibros(Libros libro) {
+    public void modificarAutor(Autores autor) {
         try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.openSession()) {
 
             session.beginTransaction();
 
-            session.merge(libro);
+            session.merge(autor);
 
             session.getTransaction();
         }
     }
 
     @Override
-    public boolean deleteLibros(int id) {
+    public boolean deleteAutor(int id) {
         boolean res = true;
         try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.openSession()) {
             //transaccion
             session.beginTransaction();
 
-            Libros libro = session.get(Libros.class,id);
+            Autores autor = session.get(Autores.class,id);
 
-            if(libro!= null){
-                session.delete(libro);
+            if(autor!= null){
+                session.delete(autor);
             }else{
                 res = false;
             }
@@ -59,48 +59,25 @@ public class ILibrosImpl implements ILibros {
     }
 
     @Override
-    public List<Libros> buscarLibrosTitulo(String titulo) {
-        List<Libros> libro = new ArrayList<>();;
+    public List<Autores> buscarAutores(String nombre) {
+        List<Autores> autores = new ArrayList<>();;
         // usamos try with para usar el auto-close de session
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            libro = session.createQuery("from Libros where titulo = :titulo", Libros.class)
-                    .setParameter("titulo", titulo)
+            autores = session.createQuery("from Autores where nombre = :nombre", Autores.class)
+                    .setParameter("nombre", nombre)
                     .list();
         }
-        autoresAninimos(libro);
-        return libro;
+        return autores;
     }
 
     @Override
-    public List<Libros> buscarLibrosAutor(String Autor) {
-        return null;
-    }
-
-    @Override
-    public List<Libros> buscarLibrosISBN(String isbn) {
-        List<Libros> libro = new ArrayList<>();;
+    public List<Autores> listarAutores() {
+        List<Autores> autores = new ArrayList<>();;
         // usamos try with para usar el auto-close de session
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            libro = session.createQuery("from Libros where isbn = :ISBN", Libros.class)
-                    .setParameter("ISBN", isbn)
+            autores = session.createQuery("from Autores", Autores.class)
                     .list();
         }
-        autoresAninimos(libro);
-        return libro;
-    }
-
-    @Override
-    public List<Libros> buscarLibrosDisponibles() {
-        return null;
-    }
-
-    public void autoresAninimos(List<Libros> libros){
-        for(Libros libro : libros){
-            if (libro.getAutores()==null){
-                Autores anonimo = new Autores();
-                anonimo.setNombre("Anonimo");
-                libro.setAutores(anonimo);
-            }
-        }
+        return autores;
     }
 }
