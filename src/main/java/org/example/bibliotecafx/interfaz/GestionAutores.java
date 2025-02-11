@@ -22,31 +22,39 @@ public class GestionAutores {
     @FXML
     private TextField id;
 
-    @FXML
     public void switchBotton(ActionEvent actionEvent) throws IOException {
         new SeceneSwitch(principal,"/org/example/bibliotecafx/interfaz/hello-view.fxml");
     }
 
-    @FXML
     public void addAutores(ActionEvent actionEvent) throws IOException {
         new SeceneSwitch(ventana,"/org/example/bibliotecafx/autores/AutoresAdd.fxml");
     }
-    @FXML
-    public void addAutorBBDD(ActionEvent actionEvent) {
-        IAutores iAutores = new IAutoresImpl();
-        Autores autor = new Autores(null,nombre.getText(),pais.getText());
-        iAutores.addAutores(autor);
-    }
+
 
     public void modificarAutores(ActionEvent actionEvent) {
+
     }
 
-    public void deleteAutores(ActionEvent actionEvent) {
+    public void deleteAutores(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/autores/AutoresEliminar.fxml");
+
     }
 
     public void buscarAutores(ActionEvent actionEvent) {
     }
 
     public void listarAutores(ActionEvent actionEvent) {
+    }
+    public void addAutorBBDD(ActionEvent actionEvent) {
+        IAutores iAutores = new IAutoresImpl();
+        Autores autor = new Autores(null,nombre.getText(),pais.getText());
+        iAutores.addAutores(autor);
+    }
+
+    public void deleteAutoresBBDD(ActionEvent actionEvent) {
+        IAutores iAutores = new IAutoresImpl();
+        int id = Integer.parseInt(this.id.getText());
+        System.out.println(id);
+        iAutores.deleteAutor(id);
     }
 }

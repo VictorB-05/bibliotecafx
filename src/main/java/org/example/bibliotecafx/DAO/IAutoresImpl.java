@@ -46,7 +46,8 @@ public class IAutoresImpl implements IAutores {
 
             Autores autor = session.get(Autores.class,id);
 
-            if(autor!= null){
+            if(autor != null){
+                System.out.println(autor);
                 session.delete(autor);
             }else{
                 res = false;
