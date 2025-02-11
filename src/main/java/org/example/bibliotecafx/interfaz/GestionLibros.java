@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import org.example.bibliotecafx.DAO.IAutores;
+import org.example.bibliotecafx.DAO.IAutoresImpl;
 import org.example.bibliotecafx.DAO.ILibros;
 import org.example.bibliotecafx.DAO.ILibrosImpl;
 import org.example.bibliotecafx.entidades.Autores;
@@ -90,9 +92,28 @@ public class GestionLibros {
     @FXML
     protected void addLibrosBBDD(ActionEvent actionEvent) {
         ILibros iLibros = new ILibrosImpl();
+        IAutores iAutores = new IAutoresImpl();
         int anyoInt = Integer.parseInt(anyo.getText().trim());
-        Libros libro = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyoInt);
-        iLibros.addLibro(libro);
+        String autorAux = autor.getText().trim();
+        if(autorAux.isEmpty()){
+            Libros libro = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyoInt);
+            iLibros.addLibro(libro);
+        }else {
+            int autorId = Integer.parseInt(autorAux);
+            if(iAutores.buscarAutor(autorId)){
+                Libros libro = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyoInt);
+                Autores autores = new Autores();
+                autores.setId(autorId);
+                libro.setAutores(autores);
+                iLibros.addLibro(libro);
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Autor no encontrado");
+                alert.setContentText("El ID del autor ingresado no existe en la base de datos.");
+                alert.showAndWait();
+            }
+        }
     }
 
     @FXML
@@ -129,7 +150,34 @@ public class GestionLibros {
         }else if(isbnR.isSelected()){
             libros = iLibros.buscarLibrosISBN(id.getText().trim());
         }else if(autorR.isSelected()){
-            libros = iLibros.buscarLibrosAutor(id.getText());
+            IAutores iAutores = new IAutoresImpl();
+            String autorAux = id.getText().trim();
+            if(!autorAux.isEmpty()){
+                try {
+                    int autorId = Integer.parseInt(autorAux);
+                    if(iAutores.buscarAutor(autorId)) {
+                        libros = iLibros.buscarLibrosAutor(autorId);
+                    }else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Autor no encontrado");
+                        alert.setContentText("El ID del autor ingresado no existe en la base de datos.");
+                        alert.showAndWait();
+                    }
+                }catch (NumberFormatException ex){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("ID");
+                    alert.setContentText("El ID tiene que ser un numero");
+                    alert.showAndWait();
+                }
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("ID");
+                alert.setContentText("El ID no puede estar vacio");
+                alert.showAndWait();
+            }
         }else{
             return;
         }
@@ -143,16 +191,29 @@ public class GestionLibros {
     @FXML
     public void modificarLibrosBBDD(ActionEvent actionEvent) {
         Libros libro;
+        IAutores iAutores = new IAutoresImpl();
         int anyo = Integer.parseInt(this.anyo.getText());
         int id = Integer.parseInt(this.id.getText());
-        if(autor.getText().trim()==""){
+        String autorAux = autor.getText().trim();
+        if(autorAux.isEmpty()){
             libro  = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyo);
-
+            ILibros librosDDBB = new ILibrosImpl();
+            librosDDBB.modificarLibros(libro);
+            libro.setId(id);
         }else{
-            libro  = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyo);
+            int autorId = Integer.parseInt(autorAux);
+            if(iAutores.buscarAutor(autorId)){
+                libro = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyo);
+                ILibros librosDDBB = new ILibrosImpl();
+                librosDDBB.modificarLibros(libro);
+                libro.setId(id);
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Autor no encontrado");
+                alert.setContentText("El ID del autor ingresado no existe en la base de datos.");
+                alert.showAndWait();
+            }
         }
-        ILibros librosDDBB = new ILibrosImpl();
-        librosDDBB.modificarLibros(libro);
-        libro.setId(id);
     }
 }

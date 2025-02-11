@@ -1,7 +1,6 @@
 package org.example.bibliotecafx.DAO;
 
 import org.example.bibliotecafx.entidades.Autores;
-import org.example.bibliotecafx.entidades.Libros;
 import org.example.bibliotecafx.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IAutoresImpl implements IAutores {
+
+    @Override
+    public boolean buscarAutor(int id) {
+        boolean retru = false;
+        try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession()) {
+            //transaccion
+            session.beginTransaction();
+
+            Autores autor = session.get(Autores.class,id);
+
+            retru = autor!=null;
+
+            session.getTransaction();
+        }
+        return retru;
+    }
+
     @Override
     public void addAutores(Autores autor) {
         try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -47,8 +64,9 @@ public class IAutoresImpl implements IAutores {
             Autores autor = session.get(Autores.class,id);
 
             if(autor != null){
-                System.out.println(autor);
-                session.delete(autor);
+                session.createNativeQuery("delete from Autores where id = :id",Autores.class)
+                        .setParameter("id", id)
+                        .executeUpdate();
             }else{
                 res = false;
             }

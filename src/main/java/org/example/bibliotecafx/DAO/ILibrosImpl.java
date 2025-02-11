@@ -10,6 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ILibrosImpl implements ILibros {
+
+    @Override
+    public boolean buscarLibro(int id) {
+        boolean retru = false;
+        try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession()) {
+            //transaccion
+            session.beginTransaction();
+
+            Libros libro = session.get(Libros.class,id);
+
+            retru = libro!=null;
+
+            session.getTransaction();
+        }
+        return retru;
+    }
+
     @Override
     public void addLibro(Libros libros) {
         try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -47,7 +65,9 @@ public class ILibrosImpl implements ILibros {
             Libros libro = session.get(Libros.class,id);
 
             if(libro!= null){
-                session.delete(libro);
+                session.createNativeQuery("delete from Libros where id = :id",Libros.class)
+                        .setParameter("id", id)
+                        .executeUpdate();
             }else{
                 res = false;
             }
@@ -72,8 +92,17 @@ public class ILibrosImpl implements ILibros {
     }
 
     @Override
-    public List<Libros> buscarLibrosAutor(String Autor) {
-        return null;
+    public List<Libros> buscarLibrosAutor(int id) {
+        List<Libros> libro = new ArrayList<>();;
+        // usamos try with para usar el auto-close de session
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            Autores autor = session.get(Autores.class,id);
+            libro = session.createQuery("from Libros where Autores = :autor", Libros.class)
+                    .setParameter("autor", autor)
+                    .list();
+        }
+        autoresAninimos(libro);
+        return libro;
     }
 
     @Override
