@@ -11,10 +11,7 @@
             <fx:define>
                 <ToggleGroup fx:id="group" />
             </fx:define>
-            <RadioButton fx:id="tituloR" mnemonicParsing="false" text="Título">
-            <toggleGroup>
-               <ToggleGroup fx:id="group" />
-            </toggleGroup></RadioButton>
+            <RadioButton fx:id="tituloR" mnemonicParsing="false" text="Título" toggleGroup="$group" />
             <RadioButton fx:id="autorR" mnemonicParsing="false" text="Autor " toggleGroup="$group" />
             <RadioButton fx:id="isbnR" mnemonicParsing="false" text="ISBN" toggleGroup="$group" />
         </children></VBox>

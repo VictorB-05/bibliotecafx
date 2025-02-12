@@ -2,20 +2,17 @@ package org.example.bibliotecafx.interfaz;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import org.example.bibliotecafx.DAO.IAutores;
-import org.example.bibliotecafx.DAO.IAutoresImpl;
-import org.example.bibliotecafx.entidades.Autores;
+import org.example.bibliotecafx.DAO.*;
 import org.example.bibliotecafx.entidades.Socios;
 
 import java.io.IOException;
 import java.util.List;
 
 public class GestionSocios {
+
 
     @FXML
     private AnchorPane principal;
@@ -29,6 +26,10 @@ public class GestionSocios {
     private TextField direccion;
     @FXML
     private TextField id;
+    @FXML
+    public RadioButton nombreR;
+    @FXML
+    public RadioButton telefonoR;
     @FXML
     private TableView<Socios> tableView;
     @FXML
@@ -45,71 +46,88 @@ public class GestionSocios {
         new SeceneSwitch(principal,"/org/example/bibliotecafx/interfaz/hello-view.fxml");
     }
 
-    public void addAutores(ActionEvent actionEvent) throws IOException {
-        new SeceneSwitch(ventana,"/org/example/bibliotecafx/autores/AutoresAdd.fxml");
+    public void addSocios(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/socios/SociosAdd.fxml");
     }
 
 
-    public void modificarAutores(ActionEvent actionEvent) throws IOException {
-        new SeceneSwitch(ventana,"/org/example/bibliotecafx/autores/AutoresModificar.fxml");
+    public void modificarSocios(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana, "/org/example/bibliotecafx/socios/SociosModifcar.fxml");
     }
 
-    public void deleteAutores(ActionEvent actionEvent) throws IOException {
-        new SeceneSwitch(ventana,"/org/example/bibliotecafx/autores/AutoresEliminar.fxml");
+    public void deleteSocios(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/socios/SociosEliminar.fxml");
 
     }
 
-    public void buscarAutores(ActionEvent actionEvent) throws IOException {
-        new SeceneSwitch(ventana,"/org/example/bibliotecafx/autores/AutoresBuscar.fxml");
+    public void buscarSocios(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/socios/SociosBuscar.fxml");
     }
 
-    public void listarAutores(ActionEvent actionEvent) throws IOException {
-        new SeceneSwitch(ventana,"/org/example/bibliotecafx/autores/AutoresListar.fxml");
+    public void listarSocios(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/socios/SociosListar.fxml");
     }
-    public void addAutorBBDD(ActionEvent actionEvent) {
-        IAutores iAutores = new IAutoresImpl();
-        Autores autor = new Autores(null,nombre.getText(), telefono.getText());
-        iAutores.addAutores(autor);
+    public void addSociosBBDD(ActionEvent actionEvent) {
+        ISocios iSocios = new ISociosImpl();
+        Socios socio = new Socios(null,nombre.getText(),telefono.getText(),direccion.getText());
+        iSocios.addSocios(socio);
     }
 
-    public void deleteAutoresBBDD(ActionEvent actionEvent) {
-        IAutores iAutores = new IAutoresImpl();
+    public void deleteSocioBBDD(ActionEvent actionEvent) {
+        ISocios iSocios = new ISociosImpl();
         int id = Integer.parseInt(this.id.getText());
-        iAutores.deleteAutor(id);
+        iSocios.deleteSocio(id);
     }
 
-    public void modificarAutorBBDD(ActionEvent actionEvent) {
-        IAutores iAutores = new IAutoresImpl();
+    public void modificarSociosBBDD(ActionEvent actionEvent) {
+        ISocios iSocios = new ISociosImpl();
         int id = Integer.parseInt(this.id.getText());
-        Autores autor = new Autores(id,nombre.getText(), telefono.getText());
-        iAutores.modificarAutor(autor);
+        Socios socio = new Socios(id,nombre.getText(),telefono.getText(), direccion.getText());
+        iSocios.modificarSocios(socio);
     }
 
-    public void buscarAutoresBBDD(ActionEvent actionEvent) {
-//        if(idTable.getCellValueFactory() == null){
-//            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
-//            nombreTable.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-//            telefonoTable.setCellValueFactory(new PropertyValueFactory<>("pais"));
-//        }else{
-//            tableView.getItems().clear();
-//        }
-//
-//        IAutores iAutores = new IAutoresImpl();
-//        List<Autores> autores = iAutores.buscarAutores(nombre.getText());
-//        tableView.getItems().addAll(autores);
+    public void buscarSociosBBDD(ActionEvent actionEvent) {
+        if(idTable.getCellValueFactory() == null){
+            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+            nombreTable.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            telefonoTable.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+            direccionTable.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        }else{
+            tableView.getItems().clear();
+        }
+
+        ISocios iSocios = new ISociosImpl();
+        List<Socios> socios;
+        if(nombreR.isSelected()){
+            socios = iSocios.buscarNombreSocio(id.getText());
+
+        }else if(telefonoR.isSelected()){
+            socios = iSocios.buscarTelefonoSocio(id.getText());
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Opción");
+            alert.setContentText("Elge una opción");
+            alert.showAndWait();
+            return;
+        }
+
+        tableView.getItems().addAll(socios);
     }
 
-    public void listarAutoresBBDD(ActionEvent actionEvent) {
-//        if(idTable.getCellValueFactory() == null){
-//            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
-//            nombreTable.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-//            telefonoTable.setCellValueFactory(new PropertyValueFactory<>("pais"));
-//        }else{
-//            tableView.getItems().clear();
-//        }
-//
-//        IAutores iAutores = new IAutoresImpl();
-//        List<Autores> autores = iAutores.listarAutores();
-//        tableView.getItems().addAll(autores);
+    public void listarSociosBBDD(ActionEvent actionEvent) {
+
+        if(idTable.getCellValueFactory() == null){
+            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+            nombreTable.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            telefonoTable.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+            direccionTable.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        }else{
+            tableView.getItems().clear();
+        }
+
+        ISocios iSocios = new ISociosImpl();
+        List<Socios> socios = iSocios.listarSocio();
+        tableView.getItems().addAll(socios);
     }
 }

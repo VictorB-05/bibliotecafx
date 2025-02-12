@@ -141,7 +141,7 @@ public class GestionLibros {
         }
 
         ILibros iLibros = new ILibrosImpl();
-        List<Libros> libros = new ArrayList<Libros>();
+        List<Libros> libros;
         if(tituloR.isSelected()) {
             System.out.println(id.getText());
             libros = iLibros.buscarLibrosTitulo(id.getText());
@@ -162,6 +162,7 @@ public class GestionLibros {
                         alert.setHeaderText("Autor no encontrado");
                         alert.setContentText("El ID del autor ingresado no existe en la base de datos.");
                         alert.showAndWait();
+                        return;
                     }
                 }catch (NumberFormatException ex){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -169,6 +170,7 @@ public class GestionLibros {
                     alert.setHeaderText("ID");
                     alert.setContentText("El ID tiene que ser un numero");
                     alert.showAndWait();
+                    return;
                 }
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -176,6 +178,7 @@ public class GestionLibros {
                 alert.setHeaderText("ID");
                 alert.setContentText("El ID no puede estar vacio");
                 alert.showAndWait();
+                return;
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -183,6 +186,7 @@ public class GestionLibros {
             alert.setHeaderText("Opción");
             alert.setContentText("Elge una opción");
             alert.showAndWait();
+            return;
         }
         tableView.getItems().addAll(libros);
     }

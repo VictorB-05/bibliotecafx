@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionSocios">
+   <children>
+      <TextField fx:id="nombre" layoutX="143.0" layoutY="165.0" prefWidth="175.0" />
+      <TextField fx:id="direccion" layoutX="433.0" layoutY="165.0" prefWidth="175.0" />
+      <TextField fx:id="telefono" layoutX="143.0" layoutY="305.0" prefWidth="175.0" />
+      <Button layoutX="433.0" layoutY="305.0" mnemonicParsing="false" onAction="#addSociosBBDD" prefWidth="175.0" text="AÑADIR SOCIO" />
+      <Label layoutX="143.0" layoutY="135.0" prefHeight="30.0" prefWidth="95.0" text="NOMBRE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="433.0" layoutY="135.0" text="DIRECCIÓN">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="143.0" layoutY="275.0" text="TELÉFONO">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
