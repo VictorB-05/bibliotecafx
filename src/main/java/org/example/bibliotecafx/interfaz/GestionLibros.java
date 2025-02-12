@@ -96,15 +96,13 @@ public class GestionLibros {
         int anyoInt = Integer.parseInt(anyo.getText().trim());
         String autorAux = autor.getText().trim();
         if(autorAux.isEmpty()){
-            Libros libro = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyoInt);
+            Libros libro = new Libros(null,titulo.getText(),isbn.getText(),editorial.getText(),anyoInt);
             iLibros.addLibro(libro);
         }else {
             int autorId = Integer.parseInt(autorAux);
-            if(iAutores.buscarAutor(autorId)){
-                Libros libro = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyoInt);
-                Autores autores = new Autores();
-                autores.setId(autorId);
-                libro.setAutores(autores);
+            Autores autor = iAutores.buscarAutor(autorId);
+            if(autor!=null){
+                Libros libro = new Libros(null,titulo.getText(),isbn.getText(),editorial.getText(),anyoInt,autor);
                 iLibros.addLibro(libro);
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -155,8 +153,9 @@ public class GestionLibros {
             if(!autorAux.isEmpty()){
                 try {
                     int autorId = Integer.parseInt(autorAux);
-                    if(iAutores.buscarAutor(autorId)) {
-                        libros = iLibros.buscarLibrosAutor(autorId);
+                    Autores autor = iAutores.buscarAutor(autorId);
+                    if(autor!=null) {
+                        libros = iLibros.buscarLibrosAutor(autor);
                     }else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
@@ -179,7 +178,11 @@ public class GestionLibros {
                 alert.showAndWait();
             }
         }else{
-            return;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Opción");
+            alert.setContentText("Elge una opción");
+            alert.showAndWait();
         }
         tableView.getItems().addAll(libros);
     }
@@ -196,17 +199,16 @@ public class GestionLibros {
         int id = Integer.parseInt(this.id.getText());
         String autorAux = autor.getText().trim();
         if(autorAux.isEmpty()){
-            libro  = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyo);
+            libro  = new Libros(id,titulo.getText(),isbn.getText(),editorial.getText(),anyo);
             ILibros librosDDBB = new ILibrosImpl();
             librosDDBB.modificarLibros(libro);
-            libro.setId(id);
         }else{
             int autorId = Integer.parseInt(autorAux);
-            if(iAutores.buscarAutor(autorId)){
-                libro = new Libros(titulo.getText(),isbn.getText(),editorial.getText(),anyo);
+            Autores autor = iAutores.buscarAutor(autorId);
+            if(autor!=null){
+                libro = new Libros(id,titulo.getText(),isbn.getText(),editorial.getText(),anyo,autor);
                 ILibros librosDDBB = new ILibrosImpl();
                 librosDDBB.modificarLibros(libro);
-                libro.setId(id);
             }else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");

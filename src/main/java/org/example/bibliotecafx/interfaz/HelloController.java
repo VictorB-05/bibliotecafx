@@ -22,7 +22,8 @@ public class HelloController {
     }
 
     @FXML
-    public void onGestionClientesClick(ActionEvent actionEvent) {
+    public void onGestionClientesClick(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(scene1,"/org/example/bibliotecafx/interfaz/GestionSocios.fxml");
     }
 
     @FXML

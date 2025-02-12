@@ -11,20 +11,19 @@ import java.util.List;
 public class IAutoresImpl implements IAutores {
 
     @Override
-    public boolean buscarAutor(int id) {
-        boolean retru = false;
+    public Autores buscarAutor(int id) {
+        Autores autor = null;
         try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.openSession()) {
             //transaccion
             session.beginTransaction();
 
-            Autores autor = session.get(Autores.class,id);
+            autor = session.get(Autores.class,id);
 
-            retru = autor!=null;
 
             session.getTransaction();
         }
-        return retru;
+        return autor;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class IAutoresImpl implements IAutores {
 
             session.merge(autor);
 
-            session.getTransaction();
+            session.getTransaction().commit();
         }
     }
 

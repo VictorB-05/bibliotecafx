@@ -11,5 +11,5 @@
             <Font size="20.0" />
         </font>
     </Label>
-    <Button layoutX="300.0" layoutY="186.0" mnemonicParsing="false" onAction="#deleteLibrosBBDD" prefHeight="20.0" prefWidth="150.0" text="Añadir libros" />
+    <Button layoutX="300.0" layoutY="186.0" mnemonicParsing="false" onAction="#deleteLibrosBBDD" prefHeight="20.0" prefWidth="150.0" text="ELIMINAR LIBRO" />
 </AnchorPane>

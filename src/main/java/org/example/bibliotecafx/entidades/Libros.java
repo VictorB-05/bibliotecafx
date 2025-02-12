@@ -24,7 +24,8 @@ public class Libros implements Serializable {
     @JoinColumn(name = "idAutor", nullable = true) // Foreign key
     private Autores autores;
 
-    public Libros(String titulo, String isbn, String editorial, int anyo) {
+    public Libros(Integer id,String titulo, String isbn, String editorial, int anyo) {
+        this.id = id;
         this.titulo = titulo;
         this.isbn = isbn;
         this.editorial = editorial;
@@ -33,7 +34,8 @@ public class Libros implements Serializable {
         autores.setNombre("anonimo");
     }
 
-    public Libros(String titulo, String isbn, String editorial, int anyo, Autores autores) {
+    public Libros(Integer id, String titulo, String isbn, String editorial, int anyo, Autores autores) {
+        this.id = id;
         this.titulo = titulo;
         this.isbn = isbn;
         this.editorial = editorial;

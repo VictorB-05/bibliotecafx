@@ -2,6 +2,7 @@ package org.example.bibliotecafx.DAO;
 
 import org.example.bibliotecafx.entidades.Autores;
 import org.example.bibliotecafx.entidades.Libros;
+import org.example.bibliotecafx.entidades.Socios;
 import org.example.bibliotecafx.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,20 +13,19 @@ import java.util.List;
 public class ILibrosImpl implements ILibros {
 
     @Override
-    public boolean buscarLibro(int id) {
-        boolean retru = false;
+    public Libros buscarLibro(int id) {
+        Libros libro = null;
         try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.openSession()) {
             //transaccion
             session.beginTransaction();
 
-            Libros libro = session.get(Libros.class,id);
+            libro = session.get(Libros.class,id);
 
-            retru = libro!=null;
 
             session.getTransaction();
         }
-        return retru;
+        return libro;
     }
 
     @Override
@@ -48,9 +48,9 @@ public class ILibrosImpl implements ILibros {
 
             session.beginTransaction();
 
-            session.merge(libro);
+            session.update(libro);
 
-            session.getTransaction();
+            session.getTransaction().commit();
         }
     }
 
@@ -92,22 +92,20 @@ public class ILibrosImpl implements ILibros {
     }
 
     @Override
-    public List<Libros> buscarLibrosAutor(int id) {
-        List<Libros> libro = new ArrayList<>();;
+    public List<Libros> buscarLibrosAutor(Autores autor) {
+        List<Libros> libro;
         // usamos try with para usar el auto-close de session
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Autores autor = session.get(Autores.class,id);
-            libro = session.createQuery("from Libros where Autores = :autor", Libros.class)
+            libro = session.createQuery("from Libros where autores = :autor", Libros.class)
                     .setParameter("autor", autor)
                     .list();
         }
-        autoresAninimos(libro);
         return libro;
     }
 
     @Override
     public List<Libros> buscarLibrosISBN(String isbn) {
-        List<Libros> libro = new ArrayList<>();;
+        List<Libros> libro;
         // usamos try with para usar el auto-close de session
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             libro = session.createQuery("from Libros where isbn = :ISBN", Libros.class)
