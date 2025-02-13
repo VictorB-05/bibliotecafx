@@ -13,6 +13,6 @@ public interface ILibros {
     List<Libros> buscarLibrosTitulo(String titulo);
     List<Libros> buscarLibrosAutor(Autores autor);
     List<Libros> buscarLibrosISBN(String isbn);
-    List<Libros> buscarLibrosDisponibles();
+    List<Libros> buscarLibrosPrestamo(boolean libres);
 
 }

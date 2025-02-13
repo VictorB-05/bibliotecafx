@@ -42,7 +42,7 @@
             <Font size="24.0"/>
         </font>
     </Button>
-    <Button layoutX="90.0" layoutY="583.0" mnemonicParsing="false" onAction="#switchBotton" prefHeight="35.0"
+    <Button layoutX="90.0" layoutY="583.0" mnemonicParsing="false" onAction="#listarLibros" prefHeight="35.0"
             prefWidth="216.0" styleClass="menu-button" text="Listar libros">
         <font>
             <Font size="24.0"/>

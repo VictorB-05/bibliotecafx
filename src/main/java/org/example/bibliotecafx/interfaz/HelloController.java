@@ -27,6 +27,7 @@ public class HelloController {
     }
 
     @FXML
-    public void onGestionPrestamosClick(ActionEvent actionEvent) {
+    public void onGestionPrestamosClick(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(scene1,"/org/example/bibliotecafx/interfaz/GestionPrestamos.fxml");
     }
 }

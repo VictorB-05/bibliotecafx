@@ -2,7 +2,6 @@ package org.example.bibliotecafx.DAO;
 
 import org.example.bibliotecafx.entidades.Autores;
 import org.example.bibliotecafx.entidades.Libros;
-import org.example.bibliotecafx.entidades.Socios;
 import org.example.bibliotecafx.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -117,8 +116,16 @@ public class ILibrosImpl implements ILibros {
     }
 
     @Override
-    public List<Libros> buscarLibrosDisponibles() {
-        return null;
+    public List<Libros> buscarLibrosPrestamo(boolean libres) {
+        List<Libros> libro;
+        // usamos try with para usar el auto-close de session
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            libro = session.createQuery("select p.libro from Prestamos p where p.devuelto = :estado", Libros.class)
+                    .setParameter("estado", libres)
+                    .list();
+        }
+        autoresAninimos(libro);
+        return libro;
     }
 
     public void autoresAninimos(List<Libros> libros){

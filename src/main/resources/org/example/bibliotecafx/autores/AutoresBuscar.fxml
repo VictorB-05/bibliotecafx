@@ -7,15 +7,15 @@
 <AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionAutores">
     <TextField fx:id="nombre" layoutX="193.0" layoutY="45.0" prefWidth="175.0" />
     <Button layoutX="408.0" layoutY="45.0" mnemonicParsing="false" onAction="#buscarAutoresBBDD" prefHeight="20.0" prefWidth="150.0" text="BUSCAR AUTORES" />
-   <TableView fx:id="tableView" layoutX="55.0" layoutY="105.0" prefHeight="350.0" prefWidth="640.0" styleClass="table-view">
-     <columns>
-         <TableColumn fx:id="idTable" prefWidth="90.0" text="id" />
-         <TableColumn fx:id="nombreTable" prefWidth="281.0" text="Nombre" />
-         <TableColumn fx:id="paisTable" prefWidth="268.0" text="Pais" />
-     </columns>
-   </TableView>
-   <Label layoutX="55.0" layoutY="42.0" text="NOMBRE">
-      <font>
-         <Font size="22.0" />
-      </font></Label>
+    <TableView fx:id="tableView" layoutX="55.0" layoutY="105.0" prefHeight="350.0" prefWidth="640.0" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="idTable" prefWidth="90.0" text="id" />
+            <TableColumn fx:id="nombreTable" prefWidth="281.0" text="Nombre" />
+            <TableColumn fx:id="paisTable" prefWidth="268.0" text="Pais" />
+        </columns>
+    </TableView>
+    <Label layoutX="55.0" layoutY="42.0" text="NOMBRE">
+        <font>
+            <Font size="22.0" />
+        </font></Label>
 </AnchorPane>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionPrestamos">
+   <children>
+      <TextField fx:id="idLibro" layoutX="140.0" layoutY="100.0" prefWidth="175.0" />
+      <TextField fx:id="idSocio" layoutX="430.0" layoutY="100.0" prefWidth="175.0" />
+      <DatePicker fx:id="fechaInico" layoutX="140.0" layoutY="200.0" prefWidth="175.0" />
+      <DatePicker fx:id="fechaFin" layoutX="430.0" layoutY="200.0" prefWidth="175.0" />
+      <Button layoutX="290.0" layoutY="310.0" mnemonicParsing="false" onAction="#addPrestamosBBDD" prefWidth="175.0" text="AÑADIR PRESTAMO" />
+      <Label layoutX="140.0" layoutY="70.0" prefHeight="30.0" prefWidth="81.0" text="ID LIBRO">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="430.0" layoutY="70.0" text="ID SOCIO">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="140.0" layoutY="170.0" text="FECHA INICO">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="430.0" layoutY="170.0" text="FECHA FIN">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+
+   </children>
+</AnchorPane>
+

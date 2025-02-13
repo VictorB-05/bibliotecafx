@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionSocios">
     <TextField fx:id="id" layoutX="143.0" layoutY="37.0" prefWidth="175.0" />
-    <Button layoutX="358.0" layoutY="37.0" mnemonicParsing="false" onAction="#buscarSociosBBDD" prefHeight="20.0" prefWidth="150.0" text="BUSCAR LIBROS" />
+    <Button layoutX="358.0" layoutY="37.0" mnemonicParsing="false" onAction="#buscarSociosBBDD" prefHeight="20.0" prefWidth="150.0" text="BUSCAR SOCIOS" />
     <VBox layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="75.0">
         <fx:define>
             <ToggleGroup fx:id="group"/>

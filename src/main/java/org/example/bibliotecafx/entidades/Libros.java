@@ -93,4 +93,9 @@ public class Libros implements Serializable {
     public void setAutores(Autores autores) {
         this.autores = autores;
     }
+
+    @Override
+    public String toString() {
+        return  titulo + " "+ id;
+    }
 }

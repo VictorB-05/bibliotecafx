@@ -2,7 +2,6 @@ package org.example.bibliotecafx.interfaz;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -14,11 +13,7 @@ import org.example.bibliotecafx.entidades.Autores;
 import org.example.bibliotecafx.entidades.Libros;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class GestionLibros {
     @FXML
@@ -65,23 +60,7 @@ public class GestionLibros {
 
     @FXML
     protected void addLibros(ActionEvent actionEvent) throws IOException {
-
-
         new SeceneSwitch(ventana,"/org/example/bibliotecafx/libros/LibrosAdd.fxml");
-
-//        ILibrosImpl librosDao = new ILibrosImpl();
-//        List<Libros> librosAnaya = Arrays.asList(
-//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
-//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
-//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
-//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
-//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022),
-//                new Libros("Java desde Cero", "9788499647083", "Anaya", 2022)
-//        );
-//
-//        for (Libros libro : librosAnaya) {
-//            librosDao.addLibro(libro);
-//        }
     }
 
     @FXML
@@ -102,6 +81,7 @@ public class GestionLibros {
             int autorId = Integer.parseInt(autorAux);
             Autores autor = iAutores.buscarAutor(autorId);
             if(autor!=null){
+                System.out.println(autor);
                 Libros libro = new Libros(null,titulo.getText(),isbn.getText(),editorial.getText(),anyoInt,autor);
                 iLibros.addLibro(libro);
             }else {
@@ -221,5 +201,27 @@ public class GestionLibros {
                 alert.showAndWait();
             }
         }
+    }
+
+    public void listarLibros() throws IOException {
+        new SeceneSwitch(ventana,"/org/example/bibliotecafx/libros/LibrosListar.fxml");
+
+    }
+
+    public void listarLibrosBBDD(){
+        if(idTable.getCellValueFactory() == null){
+            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+            tituloTable.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+            isbnTable.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+            editorialTable.setCellValueFactory(new PropertyValueFactory<>("editorial"));
+            anyoTable.setCellValueFactory(new PropertyValueFactory<>("anyo"));
+            autorTable.setCellValueFactory(new PropertyValueFactory<>("autores"));
+        }else{
+            tableView.getItems().clear();
+        }
+        ILibros iLibros = new ILibrosImpl();
+        List<Libros> libros = iLibros.buscarLibrosPrestamo(true);
+
+        tableView.getItems().addAll(libros);
     }
 }

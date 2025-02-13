@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="scene2" prefHeight="700.0" prefWidth="1200.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionPrestamos">
+    <Label layoutX="490.0" layoutY="7.0" text="Prestamos">
+        <font>
+            <Font size="81.0" />
+        </font>
+    </Label>
+    <Button layoutX="90.0" layoutY="50.0" mnemonicParsing="false" onAction="#switchBotton" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="MENU PRINCIPAL">
+        <font>
+        <Font size="24.0" />
+        </font>
+    </Button>
+    <Button layoutX="90.0" layoutY="180.0" mnemonicParsing="false" onAction="#addPrestamos" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Registrar prestamo">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Button>
+    <Button layoutX="90.0" layoutY="380.0" mnemonicParsing="false" onAction="#buscarLibros" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Listar libros">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Button>
+    <Button layoutX="90.0" layoutY="583.0" mnemonicParsing="false" onAction="#historialSocio" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Historial prestamo">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Button>
+    <AnchorPane fx:id="ventana" layoutX="378.0" layoutY="148.0" prefHeight="500.0" prefWidth="750.0" />
+</AnchorPane>

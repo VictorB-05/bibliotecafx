@@ -22,6 +22,7 @@
         <mapping class="org.example.bibliotecafx.entidades.Autores"/>
         <mapping class="org.example.bibliotecafx.entidades.Libros"/>
         <mapping class="org.example.bibliotecafx.entidades.Socios"/>
+        <mapping class="org.example.bibliotecafx.entidades.Prestamos"/>
 
     </session-factory>
 

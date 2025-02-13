@@ -60,7 +60,7 @@ public class ISociosImpl implements ISocios {
             Socios socio = session.get(Socios.class,id);
 
             if(socio!= null){
-                session.createNativeQuery("delete from Socios where id = :id",Socios.class)
+                session.createQuery("delete from Socios where id = :id",Socios.class)
                         .setParameter("id", id)
                         .executeUpdate();
             }else{

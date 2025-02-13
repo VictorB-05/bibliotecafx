@@ -2,8 +2,10 @@ package org.example.bibliotecafx.entidades;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-public class Socios {
+public class Socios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
