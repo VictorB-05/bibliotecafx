@@ -6,9 +6,9 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionPrestamos">
     <Button layoutX="358.0" layoutY="37.0" mnemonicParsing="false" onAction="#listarLibrosBBDD" prefHeight="20.0" prefWidth="150.0" text="LISTAR LIBROS" />
-    <TableView fx:id="tableView" layoutX="55.0" layoutY="96.0" prefHeight="350.0" prefWidth="640.0" styleClass="table-view">
+    <TableView fx:id="tableLibros" layoutX="55.0" layoutY="96.0" prefHeight="350.0" prefWidth="640.0" styleClass="table-view">
         <columns>
-            <TableColumn fx:id="idTable" prefWidth="41.0" text="id" />
+            <TableColumn fx:id="idTableLibros" prefWidth="41.0" text="id" />
             <TableColumn fx:id="tituloTable" prefWidth="155.0" text="titulo" />
             <TableColumn fx:id="isbnTable" prefWidth="148.0" text="isbn" />
             <TableColumn fx:id="editorialTable" prefWidth="97.0" text="editorial" />

@@ -1,12 +1,13 @@
 package org.example.bibliotecafx.DAO;
 
+import jakarta.persistence.NoResultException;
+import org.example.bibliotecafx.entidades.Libros;
 import org.example.bibliotecafx.entidades.Prestamos;
 import org.example.bibliotecafx.entidades.Socios;
 import org.example.bibliotecafx.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IPrestamosImpl implements IPrestamos {
@@ -19,7 +20,7 @@ public class IPrestamosImpl implements IPrestamos {
 
             session.persist(prestamo);
 
-            session.getTransaction();
+            session.getTransaction().commit();
         }
     }
 
@@ -36,7 +37,39 @@ public class IPrestamosImpl implements IPrestamos {
     }
 
     @Override
-    public void libroDevuelto(int id) {
+    public void libroDevuelto(Libros libro) {
+        try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession()){
 
+            Prestamos prestamo = session.createQuery("from Prestamos where libro = :libros AND devuelto = :de", Prestamos.class)
+                    .setParameter("libros",libro)
+                    .setParameter("de",false)
+                    .getSingleResult();
+
+            session.beginTransaction();
+
+            prestamo.setDevuelto(true);
+             session.merge(prestamo);
+
+            session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public boolean libroDisponible(Libros libro) {
+        boolean disponible;
+        try(SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession()){
+
+            Prestamos prestamo = session.createQuery("from Prestamos where libro = :libros AND devuelto = :de", Prestamos.class)
+                    .setParameter("libros",libro)
+                    .setParameter("de",false)
+                    .getSingleResult();
+
+            disponible = prestamo.isDevuelto();
+        }catch (NoResultException ex){
+            disponible = true;
+        }
+        return disponible;
     }
 }

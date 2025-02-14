@@ -29,13 +29,11 @@ public class GestionPrestamos {
     @FXML
     private DatePicker fechaFin;
     @FXML
-    private TableView<Prestamos> tableView;
+    private TableView<Prestamos> tablePrestamos;
     @FXML
-    private TableColumn<Prestamos,Integer> idTable;
+    private TableColumn<Prestamos,Integer> idTablePrestamos;
     @FXML
     private TableColumn<Prestamos,Libros> libroTable;
-    @FXML
-    private TableColumn<Prestamos,Socios> socioTable;
     @FXML
     private TableColumn<Prestamos, LocalDate> fechaInicioTable;
     @FXML
@@ -43,9 +41,9 @@ public class GestionPrestamos {
     @FXML
     private TableColumn<Prestamos, Boolean> debueltoTable;
     @FXML
-    private TableView<Libros> tableView;
+    private TableView<Libros> tableLibros;
     @FXML
-    private TableColumn<Libros,Integer> idTable;
+    private TableColumn<Libros,Integer> idTableLibros;
     @FXML
     private TableColumn<Libros,String> tituloTable;
     @FXML
@@ -103,6 +101,14 @@ public class GestionPrestamos {
             alert.showAndWait();
             return;
         }
+        if(!iPrestamos.libroDisponible(libro)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Libro no disponible");
+            alert.setContentText("El libro que se quiere prestar esta en prestamo ya en la base de datos");
+            alert.showAndWait();
+            return;
+        }
         if(!idSocioAux.isEmpty()){
             try{
                 socios = iSocios.buscarSocio(Integer.parseInt(idSocioAux));
@@ -146,15 +152,14 @@ public class GestionPrestamos {
 
     @FXML
     public void historialSocioBBDD(ActionEvent actionEvent) {
-        if(idTable.getCellValueFactory() == null){
-            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+        if(idTablePrestamos.getCellValueFactory() == null){
+            idTablePrestamos.setCellValueFactory(new PropertyValueFactory<>("id"));
             libroTable.setCellValueFactory(new PropertyValueFactory<>("libro"));
-            socioTable.setCellValueFactory(new PropertyValueFactory<>("socios"));
             fechaInicioTable.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
             fechaFinTable.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
             debueltoTable.setCellValueFactory(new PropertyValueFactory<>("devuelto"));
         }else{
-            tableView.getItems().clear();
+            tablePrestamos.getItems().clear();
         }
         ISocios iSocios = new ISociosImpl();
         Socios socios;
@@ -167,7 +172,7 @@ public class GestionPrestamos {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Libro no encontrado");
-                    alert.setContentText("El ID del libro ingresado no existe en la base de datos.");
+                    alert.setContentText("El ID del socio ingresado no existe en la base de datos.");
                     alert.showAndWait();
                     return;
                 }
@@ -183,7 +188,7 @@ public class GestionPrestamos {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Formato no valido");
-            alert.setContentText("El ID no puedo ser nulo del socio.");
+            alert.setContentText("El ID no puedo ser nulo.");
             alert.showAndWait();
             return;
         }
@@ -192,23 +197,62 @@ public class GestionPrestamos {
         for(Prestamos prestamos1 : prestamos){
             System.out.println(prestamos1);
         }
-        tableView.getItems().addAll(prestamos);
+        tablePrestamos.getItems().addAll(prestamos);
     }
 
     public void listarLibrosBBDD(ActionEvent actionEvent) {
-        if(idTable.getCellValueFactory() == null){
-            idTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+        if(idTableLibros.getCellValueFactory() == null){
+            idTableLibros.setCellValueFactory(new PropertyValueFactory<>("id"));
             tituloTable.setCellValueFactory(new PropertyValueFactory<>("titulo"));
             isbnTable.setCellValueFactory(new PropertyValueFactory<>("isbn"));
             editorialTable.setCellValueFactory(new PropertyValueFactory<>("editorial"));
             anyoTable.setCellValueFactory(new PropertyValueFactory<>("anyo"));
             autorTable.setCellValueFactory(new PropertyValueFactory<>("autores"));
         }else{
-            tableView.getItems().clear();
+            tableLibros.getItems().clear();
         }
         ILibros iLibros = new ILibrosImpl();
-        List<Libros> libros = iLibros.buscarLibrosPrestamo(true);
+        List<Libros> libros = iLibros.buscarLibrosPrestados();
 
-        tableView.getItems().addAll(libros);
+        tableLibros.getItems().addAll(libros);
+    }
+
+    public void devolverLibros(ActionEvent actionEvent) throws IOException {
+        new SeceneSwitch(ventana, "/org/example/bibliotecafx/prestamos/LibrosDevolver.fxml");
+    }
+
+    public void devolverLibrosBBDD(ActionEvent actionEvent) {
+        ILibros iLibros = new ILibrosImpl();
+        Libros libro;
+        String idLibrosAux = idLibro.getText().trim();
+        if(!idLibrosAux.isEmpty()){
+            try{
+                libro = iLibros.buscarLibro(Integer.parseInt(idLibrosAux));
+                if (libro==null){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Libro no encontrado");
+                    alert.setContentText("El ID del libro ingresado no existe en la base de datos.");
+                    alert.showAndWait();
+                    return;
+                }
+            }catch (NumberFormatException ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Formato no valido");
+                alert.setContentText("El ID contien un carracter no valido del libro.");
+                alert.showAndWait();
+                return;
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Formato no valido");
+            alert.setContentText("El ID no puede ser nulo del libro.");
+            alert.showAndWait();
+            return;
+        }
+        IPrestamos iPrestamos = new IPrestamosImpl();
+        iPrestamos.libroDevuelto(libro);
     }
 }

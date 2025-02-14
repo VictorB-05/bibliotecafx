@@ -220,7 +220,7 @@ public class GestionLibros {
             tableView.getItems().clear();
         }
         ILibros iLibros = new ILibrosImpl();
-        List<Libros> libros = iLibros.buscarLibrosPrestamo(true);
+        List<Libros> libros = iLibros.buscarLibrosLibres();
 
         tableView.getItems().addAll(libros);
     }

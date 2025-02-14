@@ -7,14 +7,13 @@
 <AnchorPane prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.bibliotecafx.interfaz.GestionPrestamos">
     <TextField fx:id="idSocio" layoutX="193.0" layoutY="45.0" prefWidth="175.0" />
     <Button layoutX="408.0" layoutY="45.0" mnemonicParsing="false" onAction="#historialSocioBBDD" prefHeight="20.0" prefWidth="150.0" text="BUSCAR HISTORIAL" />
-    <TableView fx:id="tableView" layoutX="55.0" layoutY="105.0" prefHeight="350.0" prefWidth="640.0" styleClass="table-view">
+    <TableView fx:id="tablePrestamos" layoutX="55.0" layoutY="105.0" prefHeight="350.0" prefWidth="640.0" styleClass="table-view">
         <columns>
-            <TableColumn fx:id="idTable" prefWidth="77.0" text="id" />
-            <TableColumn fx:id="libroTable" prefWidth="294.0" text="Libro" />
-            <TableColumn fx:id="socioTable" prefWidth="268.0" text="Socio" />
-            <TableColumn fx:id="fechaInicioTable" prefWidth="294.0" text="Fecha Inicio" />
-            <TableColumn fx:id="fechaFinTable" prefWidth="268.0" text="Fecha Fin" />
-            <TableColumn fx:id="debueltoTable" prefWidth="268.0" text="Debuelto" />
+            <TableColumn fx:id="idTablePrestamos" prefWidth="90.0" text="id" />
+            <TableColumn fx:id="libroTable" prefWidth="150.0" text="Libro" />
+            <TableColumn fx:id="fechaInicioTable" prefWidth="150.0" text="Fecha Inicio" />
+            <TableColumn fx:id="fechaFinTable" prefWidth="150.0" text="Fecha Fin" />
+            <TableColumn fx:id="debueltoTable" prefWidth="100.0" text="Devuelto" />
         </columns>
     </TableView>
     <Label layoutX="62.0" layoutY="42.0" text="ID SOCIO">

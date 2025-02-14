@@ -116,12 +116,27 @@ public class ILibrosImpl implements ILibros {
     }
 
     @Override
-    public List<Libros> buscarLibrosPrestamo(boolean libres) {
+    public List<Libros> buscarLibrosLibres() {
+        List<Libros> libro;
+        // usamos try with para usar el auto-close de session
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            libro = session.createQuery("select l from Libros l " +
+                                    "left join Prestamos p on l.id = p.libro.id " +
+                                    "where p.devuelto = :estado OR p.id IS NULL", Libros.class)
+                    .setParameter("estado", true)
+                    .list();
+        }
+        autoresAninimos(libro);
+        return libro;
+    }
+
+    @Override
+    public List<Libros> buscarLibrosPrestados() {
         List<Libros> libro;
         // usamos try with para usar el auto-close de session
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             libro = session.createQuery("select p.libro from Prestamos p where p.devuelto = :estado", Libros.class)
-                    .setParameter("estado", libres)
+                    .setParameter("estado", false)
                     .list();
         }
         autoresAninimos(libro);

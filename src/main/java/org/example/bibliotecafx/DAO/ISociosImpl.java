@@ -60,7 +60,7 @@ public class ISociosImpl implements ISocios {
             Socios socio = session.get(Socios.class,id);
 
             if(socio!= null){
-                session.createQuery("delete from Socios where id = :id",Socios.class)
+                session.createQuery("delete from Socios where id = :id")
                         .setParameter("id", id)
                         .executeUpdate();
             }else{
@@ -68,7 +68,7 @@ public class ISociosImpl implements ISocios {
             }
 
             // guardar en mi bbdd
-            session.getTransaction();
+            session.getTransaction().commit();
         }
         return res;
     }

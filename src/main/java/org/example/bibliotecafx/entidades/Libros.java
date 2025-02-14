@@ -1,6 +1,11 @@
 package org.example.bibliotecafx.entidades;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.tool.schema.Action;
 
 import java.io.Serializable;
 
@@ -21,7 +26,8 @@ public class Libros implements Serializable {
     private int anyo;
 
     @ManyToOne
-    @JoinColumn(name = "idAutor", nullable = true) // Foreign key
+    @JoinColumn(name = "idAutor", nullable = true)
+    @OnDelete(action= OnDeleteAction.SET_NULL)
     private Autores autores;
 
     public Libros(Integer id,String titulo, String isbn, String editorial, int anyo) {

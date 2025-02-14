@@ -1,6 +1,9 @@
 package org.example.bibliotecafx.entidades;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,11 +15,13 @@ public class Prestamos implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="idLibro",nullable = false)
+    @JoinColumn(name="idLibro")
+    @OnDelete(action= OnDeleteAction.SET_NULL)
     private Libros libro;
 
     @ManyToOne
     @JoinColumn(name="idSocio",nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
     private Socios socios;
 
     @Column(nullable = false)

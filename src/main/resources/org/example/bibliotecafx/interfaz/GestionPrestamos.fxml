@@ -15,17 +15,22 @@
         <Font size="24.0" />
         </font>
     </Button>
-    <Button layoutX="90.0" layoutY="180.0" mnemonicParsing="false" onAction="#addPrestamos" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Registrar prestamo">
+    <Button layoutX="90.0" layoutY="190.0" mnemonicParsing="false" onAction="#addPrestamos" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Registrar">
         <font>
             <Font size="24.0" />
         </font>
     </Button>
-    <Button layoutX="90.0" layoutY="380.0" mnemonicParsing="false" onAction="#buscarLibros" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Listar libros">
+    <Button layoutX="90.0" layoutY="323.0" mnemonicParsing="false" onAction="#devolverLibros" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Devolver libros">
         <font>
             <Font size="24.0" />
         </font>
     </Button>
-    <Button layoutX="90.0" layoutY="583.0" mnemonicParsing="false" onAction="#historialSocio" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Historial prestamo">
+    <Button layoutX="90.0" layoutY="456.0" mnemonicParsing="false" onAction="#buscarLibros" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Listar libros">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Button>
+    <Button layoutX="90.0" layoutY="589.0" mnemonicParsing="false" onAction="#historialSocio" prefHeight="35.0" prefWidth="216.0" styleClass="menu-button" text="Historial socio">
         <font>
             <Font size="24.0" />
         </font>
